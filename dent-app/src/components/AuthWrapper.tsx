@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import tokenRefreshService from "@/services/tokenRefreshService";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
@@ -65,7 +64,6 @@ export function AuthWrapper({ children }: AuthWrapperProps) {
   if (isAuthenticating) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <LoadingSpinner className="h-8 w-8" />
         <span className="ml-2">Authenticating...</span>
       </div>
     );

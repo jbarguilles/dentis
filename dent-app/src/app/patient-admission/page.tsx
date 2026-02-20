@@ -199,6 +199,26 @@ function PatientAdmissionPage() {
   const [extractedTeeth, setExtractedTeeth] = useState<{ [key: string]: boolean }>({});
 
   const [formData, setFormData] = useState<PatientRecordData>({
+    patientInformationData: {
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      suffix: "",
+      sex: "",
+      civilStatus: "",
+      birthdate: "",
+      age: 0,
+      houseStreetSubdivision: "",
+      barangay: "",
+      city: "",
+      province: "",
+      region: "",
+      contactNumber: "",
+      emergencyContact: "",
+      emergencyNumber: "",
+      emergencyRelationship: "",
+      patientNumber: "",
+    },
     patientInterviewData: {
       chiefComplaintAndHistory: "",
       dentalHistoryData: {
@@ -303,6 +323,17 @@ function PatientAdmissionPage() {
         alcohol_checked: false,
         drugs_checked: false,
       },
+    },
+    physicalAssessmentData: {
+      gait: "",
+      appearance: "",
+      defects: "",
+      weight: 0,
+      height: 0,
+      bloodPressure: "",
+      pulseRate: 0,
+      respiratoryRate: 0,
+      temperature: 0,
     },
     softTissueData: {
       patientId: 0,

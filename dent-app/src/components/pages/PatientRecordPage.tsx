@@ -207,10 +207,19 @@ export function PatientRecordPage() {
       teethNotes: "",
     },
     softTissueData: {
-      lips: "",
-      gingiva: "",
+      patientId: 0,
+      date: "",
+      headNeckTmj: "",
+      lipsFrenum: "",
+      mucosa: "",
+      palate: "",
+      pharynx: "",
+      floorMouth: "",
       tongue: "",
-      oralMucosa: "",
+      lymphNodes: "",
+      salivaryGland: "",
+      thyroid: "",
+      gingiva: "",
     },
     periodontalChartData: {
       upperTeeth: {
@@ -683,10 +692,6 @@ export function PatientRecordPage() {
   const handlePhysicalAssessmentChange = (field: string, value: any) => {
     setFormData((prev) => ({
       ...prev,
-      physicalAssessmentData: {
-        ...prev.physicalAssessmentData,
-        [field]: value,
-      },
     }));
   };
 
@@ -791,7 +796,7 @@ export function PatientRecordPage() {
       case 3:
         return (
           <PhysicalAssessment
-            formData={formData.physicalAssessmentData}
+            patientNumber="0"
             handleChange={handlePhysicalAssessmentChange}
           />
         );
@@ -844,28 +849,28 @@ export function PatientRecordPage() {
             <div className="flex">
               {chartType === "dental" ? (
                 <DentalStatusCharting
-                  formData={formData.dentalStatusData}
-                  handleChange={handleDentalStatusChange}
-                  treatmentPlanValuesArrayTop={treatmentPlanValuesArrayTop}
-                  setTreatmentPlanValuesArrayTop={setTreatmentPlanValuesArrayTop}
-                  treatmentPlanValuesArrayBottom={treatmentPlanValuesArrayBottom}
-                  setTreatmentPlanValuesArrayBottom={setTreatmentPlanValuesArrayBottom}
-                  lesionStatusValuesArrayTop={lesionStatusValuesArrayTop}
-                  setLesionStatusValuesArrayTop={setLesionStatusValuesArrayTop}
-                  lesionStatusValuesArrayBottom={lesionStatusValuesArrayBottom}
-                  setLesionStatusValuesArrayBottom={setLesionStatusValuesArrayBottom}
-                  icdasValuesArrayTop={icdasValuesArrayTop}
-                  setIcdasValuesArrayTop={setIcdasValuesArrayTop}
-                  icdasValuesArrayBottom={icdasValuesArrayBottom}
-                  setIcdasValuesArrayBottom={setIcdasValuesArrayBottom}
-                  existingConditionTop={existingConditionTop}
-                  setExistingConditionTop={setExistingConditionTop}
-                  existingConditionBottom={existingConditionBottom}
-                  setExistingConditionBottom={setExistingConditionBottom}
-                  drawings={drawings}
-                  setDrawings={setDrawings}
-                  extractedTeeth={extractedTeeth}
-                  setExtractedTeeth={setExtractedTeeth}
+                  // formData={formData.dentalStatusData}
+                  // handleChange={handleDentalStatusChange}
+                  // treatmentPlanValuesArrayTop={treatmentPlanValuesArrayTop}
+                  // setTreatmentPlanValuesArrayTop={setTreatmentPlanValuesArrayTop}
+                  // treatmentPlanValuesArrayBottom={treatmentPlanValuesArrayBottom}
+                  // setTreatmentPlanValuesArrayBottom={setTreatmentPlanValuesArrayBottom}
+                  // lesionStatusValuesArrayTop={lesionStatusValuesArrayTop}
+                  // setLesionStatusValuesArrayTop={setLesionStatusValuesArrayTop}
+                  // lesionStatusValuesArrayBottom={lesionStatusValuesArrayBottom}
+                  // setLesionStatusValuesArrayBottom={setLesionStatusValuesArrayBottom}
+                  // icdasValuesArrayTop={icdasValuesArrayTop}
+                  // setIcdasValuesArrayTop={setIcdasValuesArrayTop}
+                  // icdasValuesArrayBottom={icdasValuesArrayBottom}
+                  // setIcdasValuesArrayBottom={setIcdasValuesArrayBottom}
+                  // existingConditionTop={existingConditionTop}
+                  // setExistingConditionTop={setExistingConditionTop}
+                  // existingConditionBottom={existingConditionBottom}
+                  // setExistingConditionBottom={setExistingConditionBottom}
+                  // drawings={drawings}
+                  // setDrawings={setDrawings}
+                  // extractedTeeth={extractedTeeth}
+                  // setExtractedTeeth={setExtractedTeeth}
                 />
               ) : chartType === "periodontal" ? (
                 <PeriodontalChart />
@@ -904,7 +909,7 @@ export function PatientRecordPage() {
             <div className="px-4 py-2 bg-green-50 border border-green-200 rounded-lg">
               <span className="text-sm font-medium text-green-800 mr-2">Patient Number:</span>
               <span className="text-lg font-semibold text-green-900">
-                {formData.patientInformationData.patientNumber || searchParams.get("patientNumber")}
+                {searchParams.get("patientNumber")}
               </span>
             </div>
           )}

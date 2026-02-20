@@ -1,6 +1,8 @@
 import { PatientInterviewData } from "./patient-interview";
 import { ProblemListData } from "./problem-list";
 import { DentalChartData } from "./dental-chart";
+import { PatientInformationData } from "@/components/patient-record-components/patient-information/patient-information.type";
+import { PhysicalAssessmentData } from "@/components/patient-record-components/physical-assessment/physical-assessment.type";
 
 export interface SoftTissueExaminationData {
   patientId: number;
@@ -26,7 +28,9 @@ export interface SoftTissueExaminationData {
 }
 
 export interface PatientRecordData {
+  patientInformationData: PatientInformationData;
   patientInterviewData: PatientInterviewData; // You can replace 'any' with a more specific type if available
+  physicalAssessmentData: PhysicalAssessmentData;
   softTissueData: SoftTissueExaminationData;
   dentalStatusData: {
     teethNotes: string;

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import React, { useState } from "react";
 import { toast } from "sonner";
 
 interface LocationData {

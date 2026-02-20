@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd dent-app && pnpm run build",
+  "outputDirectory": "dent-app/.next",
+  "installCommand": "cd dent-app && pnpm install",
+  "framework": "nextjs",
+  "rootDirectory": "dent-app"
+}
