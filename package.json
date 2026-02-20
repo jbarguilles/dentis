@@ -1,0 +1,28 @@
+{
+  "name": "dent-app-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack dental application",
+  "scripts": {
+    "build": "cd dent-app && pnpm build",
+    "build:backend": "cd dent-app-be && mvn clean compile",
+    "build:all": "pnpm build:backend && pnpm build",
+    "format": "cd dent-app && pnpm format:all",
+    "format:check": "cd dent-app && pnpm format:all:check",
+    "lint": "cd dent-app && pnpm lint && pnpm lint:biome",
+    "lint:fix": "cd dent-app && pnpm lint:biome:fix",
+    "test:backend": "cd dent-app-be && mvn test",
+    "ci": "pnpm format:check && pnpm lint && pnpm build:all && pnpm test:backend",
+    "pre-commit": "pnpm format && pnpm lint:fix && pnpm build:all && pnpm test:backend",
+    "commit:frontend": "cd dent-app && git add . && git status",
+    "commit:backend": "cd dent-app-be && git add . && git status",
+    "commit:status": "echo 'Frontend:' && cd dent-app && git status && echo '' && echo 'Backend:' && cd ../dent-app-be && git status",
+    "dev": "cd dent-app && pnpm dev:fullstack",
+    "dev:frontend": "cd dent-app && pnpm dev",
+    "dev:backend": "cd dent-app-be && mvn spring-boot:run",
+    "clean": "cd dent-app && rm -rf .next node_modules && cd ../dent-app-be && mvn clean"
+  },
+  "workspaces": [
+    "dent-app"
+  ]
+}

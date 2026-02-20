@@ -1,0 +1,460 @@
+CREATE PLUGGABLE DATABASE DENTAPPDB ADMIN USER DENTAPPDBADMIN IDENTIFIED BY pwpw FILE_NAME_CONVERT=('C:\app\redas\p
+roduct\21c\oradata\XE\pdbseed', 'C:\app\redas\product\21c\oradata\XE\DENTAPPDB');
+
+ALTER PLUGGABLE DATABASE DENTAPPDB OPEN;
+
+ALTER SESSION SET CONTAINER=DENTAPPDB;
+CREATE USER dentappuser IDENTIFIED BY pw;
+GRANT ALL PRIVILEGES TO dentappuser;
+
+
+CREATE TABLE CHART (
+    CHART_ID                                            NUMBER NOT NULL,
+    TEETH11                                  BLOB,
+    TEETH12                                  BLOB,
+    TEETH13                                  BLOB,
+    TEETH14                                  BLOB,
+    TEETH15                                  BLOB,
+    TEETH16                                  BLOB,
+    TEETH17                                  BLOB,
+    TEETH18                                  BLOB,
+    TEETH21                                  BLOB,
+    TEETH22                                  BLOB,
+    TEETH23                                  BLOB,
+    TEETH24                                  BLOB,
+    TEETH25                                  BLOB,
+    TEETH26                                  BLOB,
+    TEETH27                                  BLOB,
+    TEETH28                                  BLOB,
+    TEETH31                                  BLOB,
+    TEETH32                                  BLOB,
+    TEETH33                                  BLOB,
+    TEETH34                                  BLOB,
+    TEETH35                                  BLOB,
+    TEETH36                                  BLOB,
+    TEETH37                                  BLOB,
+    TEETH38                                  BLOB,
+    TEETH41                                  BLOB,
+    TEETH42                                  BLOB,
+    TEETH43                                  BLOB,
+    TEETH44                                  BLOB,
+    TEETH45                                  BLOB,
+    TEETH46                                  BLOB,
+    TEETH47                                  BLOB,
+    TEETH48                                  BLOB,
+    EC11                                  BLOB,
+    EC12                                  BLOB,
+    EC13                                  BLOB,
+    EC14                                  BLOB,
+    EC15                                  BLOB,
+    EC16                                  BLOB,
+    EC17                                  BLOB,
+    EC18                                  BLOB,
+    EC21                                  BLOB,
+    EC22                                  BLOB,
+    EC23                                  BLOB,
+    EC24                                  BLOB,
+    EC25                                  BLOB,
+    EC26                                  BLOB,
+    EC27                                  BLOB,
+    EC28                                  BLOB,
+    EC31                                  BLOB,
+    EC32                                  BLOB,
+    EC33                                  BLOB,
+    EC34                                  BLOB,
+    EC35                                  BLOB,
+    EC36                                  BLOB,
+    EC37                                  BLOB,
+    EC38                                  BLOB,
+    EC41                                  BLOB,
+    EC42                                  BLOB,
+    EC43                                  BLOB,
+    EC44                                  BLOB,
+    EC45                                  BLOB,
+    EC46                                  BLOB,
+    EC47                                  BLOB,
+    EC48                                  BLOB,
+    TREATMENT_PLANS                         VARCHAR2(40),
+    LESION_STATUSES                         VARCHAR2(40),
+    ICDAS_CODES                             VARCHAR2(40),
+    CONSTRAINT CHART_PK PRIMARY KEY (CHART_ID)
+);
+
+CREATE SEQUENCE CHART_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+CREATE TABLE PATIENT (
+    PATIENT_ID                                            NUMBER NOT NULL,
+    CONSTRAINT PATIENT_PK PRIMARY KEY (PATIENT_ID)
+);
+
+ALTER TABLE CHART ADD PATIENT_ID NUMBER NOT NULL;
+    alter table chart add CONSTRAINT FK_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID)
+
+CREATE SEQUENCE PATIENT_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+  alter table CHART
+      drop column PATIENT_ID;
+
+
+---------------
+
+CREATE TABLE PATIENT (
+    PATIENT_ID                              NUMBER NOT NULL,
+    REGISTRATION_DATE                       DATE NOT NULL,
+    SURNAME                                 VARCHAR2(255) NOT NULL,
+    FIRST_NAME                              VARCHAR2(255) NOT NULL,
+    MIDDLE_NAME                             VARCHAR2(255) NOT NULL,
+    GENDER                                  VARCHAR2(20) NOT NULL,
+    CIVIL_STATUS                            VARCHAR2(20) NOT NULL,
+    BIRTHDATE                               DATE NOT NULL,
+    AGE                                     NUMBER NOT NULL,
+    ADDRESS                                 VARCHAR2(255) NOT NULL,
+    CELLPHONE_NUMBER                        VARCHAR2(255) NOT NULL,
+    CP_NAME                                 VARCHAR2(255) NOT NULL,
+    CP_NUMBER                               VARCHAR2(255) NOT NULL,
+    CP_RELATIONSHIP                         VARCHAR2(255) NOT NULL,
+    SCALING                                 VARCHAR2(10) NOT NULL,
+    EXTRACTION                              VARCHAR2(10) NOT NULL,
+    ROOT_CANAL                              VARCHAR2(10) NOT NULL,
+    COMPLETE_DENTURES_RPD                   VARCHAR2(10) NOT NULL,
+    REMOVABLE_PARTIAL_DENTURES              VARCHAR2(10) NOT NULL,
+    WISDOM_TOOTH_REMOVAL                    VARCHAR2(10) NOT NULL,
+    CONSTRAINT PATIENT_PK PRIMARY KEY (PATIENT_ID)
+);
+
+CREATE SEQUENCE PATIENT_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+
+
+CREATE TABLE SOFT_TISSUE_EXAMINATION (
+    STE_ID                      NUMBER NOT NULL,
+    "DATE"                        DATE NOT NULL,
+    HEAD_NECK_TMJ               VARCHAR2(1000),
+    MUCOSA               VARCHAR2(1000),
+    PHARYNX               VARCHAR2(1000),
+    TONGUE               VARCHAR2(1000),
+    SALIVARY_GLAND               VARCHAR2(1000),
+    GINGIVA               VARCHAR2(1000),
+    LIPS_FRENUM               VARCHAR2(1000),
+    PALATE               VARCHAR2(1000),
+    FLOOR_OF_MOUTH               VARCHAR2(1000),
+    LYMPH_NODES               VARCHAR2(1000),
+    THYROID               VARCHAR2(1000),
+    CONSTRAINT STE_PK PRIMARY KEY (STE_ID)
+);
+CREATE SEQUENCE STE_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+CREATE TABLE MEDICAL_HISTORY_CHART (
+    MHC_ID                                  NUMBER NOT NULL,
+    --NAME                                    VARCHAR2(80),
+    --CHART_NUMBER                            VARCHAR2(20),
+    HIGH_BLOOD_PRESSURE                     NUMBER(1) DEFAULT 0 NOT NULL,
+    HEART_ATTACK                            NUMBER(1) DEFAULT 0 NOT NULL,
+    ANGINA_PECTORIS_CHEST_PAIN              NUMBER(1) DEFAULT 0 NOT NULL,
+    SWOLLEN_ANKLES                          NUMBER(1) DEFAULT 0 NOT NULL,
+    FREQUENT_HIGH_FEVER                     NUMBER(1) DEFAULT 0 NOT NULL,
+    PACEMAKERS_ARTIFICIAL_HEART_VALVES      NUMBER(1) DEFAULT 0 NOT NULL,
+    EMPHYSEMA                               NUMBER(1) DEFAULT 0 NOT NULL,
+    ASTHMA                                  NUMBER(1) DEFAULT 0 NOT NULL,
+    AFTERNOON_FEVER                         NUMBER(1) DEFAULT 0 NOT NULL,
+    CHRONIC_COUGH                           NUMBER(1) DEFAULT 0 NOT NULL,
+    BREATHING_PROBLEMS                      NUMBER(1) DEFAULT 0 NOT NULL,
+    BLOODY_SPUTUM                           NUMBER(1) DEFAULT 0 NOT NULL,
+    SINUSITIS                               NUMBER(1) DEFAULT 0 NOT NULL,
+    FREQUENT_HEADACHES                      NUMBER(1) DEFAULT 0 NOT NULL,
+    DIZZINESS                               NUMBER(1) DEFAULT 0 NOT NULL,
+    FAINTING_SPELL_OR_LOSS_OF_CONSCIOUSNESS NUMBER(1) DEFAULT 0 NOT NULL,
+    VISUAL_IMPAIRMENT                       NUMBER(1) DEFAULT 0 NOT NULL,
+    ARTHRITIS                               NUMBER(1) DEFAULT 0 NOT NULL,
+    PAIN_IN_JOINTS                          NUMBER(1) DEFAULT 0 NOT NULL,
+    TREMORS                                 NUMBER(1) DEFAULT 0 NOT NULL,
+    BLOOD_TRANSFUSION                       NUMBER(1) DEFAULT 0 NOT NULL,
+    DENIED_PERMISSION_TO_GIVE_BLOOD         NUMBER(1) DEFAULT 0 NOT NULL,
+    PALLOR                                  NUMBER(1) DEFAULT 0 NOT NULL,
+    DIABETES                                NUMBER(1) DEFAULT 0 NOT NULL,
+    GOITER                                  NUMBER(1) DEFAULT 0 NOT NULL,
+    BLEEDING_OR_BRUISING_TENDENCY           NUMBER(1) DEFAULT 0 NOT NULL,
+    SUDDEN_WEIGHT_LOSS_GAIN                 NUMBER(1) DEFAULT 0 NOT NULL,
+    FREQUENT_THIRST                         NUMBER(1) DEFAULT 0 NOT NULL,
+    FREQUENT_HUNGER                         NUMBER(1) DEFAULT 0 NOT NULL,
+    FREQUENT_URINATION                      NUMBER(1) DEFAULT 0 NOT NULL,
+    CHEMOTHERAPY                            NUMBER(1) DEFAULT 0 NOT NULL,
+    PAIN_UPON_URINATION                     NUMBER(1) DEFAULT 0 NOT NULL,
+    BLOOD_OR_PUS_IN_URINE                   NUMBER(1) DEFAULT 0 NOT NULL,
+    PELVIC_OR_LOWER_ABDOMINAL_DISCOMFORT    NUMBER(1) DEFAULT 0 NOT NULL,
+    NERVOUSNESS                             NUMBER(1) DEFAULT 0 NOT NULL,
+    DEPRESSION                              NUMBER(1) DEFAULT 0 NOT NULL,
+    ANXIETY                                 NUMBER(1) DEFAULT 0 NOT NULL,
+    S1_OTHERS                               NUMBER(1) DEFAULT 0 NOT NULL,
+    S1_OTHERS_SPECIFY                       VARCHAR2(1000),
+    FH_DIABETES                             NUMBER(1) DEFAULT 0 NOT NULL,
+    FH_HEART_DISEASE                        NUMBER(1) DEFAULT 0 NOT NULL,
+    FH_BLEEDING_DISORDERS                   NUMBER(1) DEFAULT 0 NOT NULL,
+    FH_CANCER                               NUMBER(1) DEFAULT 0 NOT NULL,
+    FH_OTHERS                               NUMBER(1) DEFAULT 0 NOT NULL,
+    FH_OTHERS_SPECIFY                       VARCHAR2(1000),
+    ALLERGIES_DRUGS                         NUMBER(1) DEFAULT 0 NOT NULL,
+    ALLERGIES_DRUGS_SPECIFY                 VARCHAR2(255),
+    ALLERGIES_FOOD                          NUMBER(1) DEFAULT 0 NOT NULL,
+    ALLERGIES_FOOD_SPECIFY                  VARCHAR2(255),
+    ALLERGIES_RUBBER                        NUMBER(1) DEFAULT 0 NOT NULL,
+    ALLERGIES_RUBBER_SPECIFY                VARCHAR2(255),
+    ALLERGIES_OTHERS                        NUMBER(1) DEFAULT 0 NOT NULL,
+    ALLERGIES_OTHERS_SPECIFY                VARCHAR2(1000),
+    FEMALES_PREGNANT                        NUMBER(1) DEFAULT 0 NOT NULL,
+    FEMALES_PREGNANT_MONTHS                 NUMBER(3),
+    FEMALES_BREASTFEEDING                   NUMBER(1) DEFAULT 0 NOT NULL,
+    FEMALES_UNDER_HRT                       NUMBER(1) DEFAULT 0 NOT NULL,
+    FEMALES_MENSTRUATION                    NUMBER(1) DEFAULT 0 NOT NULL,
+    FEMALES_CONTRACEPTIVE                   NUMBER(1) DEFAULT 0 NOT NULL,
+    FEMALES_CONTRACEPTIVE_SPECIFY           VARCHAR2(100),
+    CONSTRAINT MHC_PK PRIMARY KEY (MHC_ID)
+);
+
+CREATE SEQUENCE MHC_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+CREATE TABLE PROBLEM_LIST_WORKSHEET (
+    PLW_ID                                  NUMBER NOT NULL,
+    --NAME                                    VARCHAR2(80),
+    ATTENDING_CLINICIAN                     VARCHAR2(80),
+    --CHART_NUMBER                            VARCHAR2(20),
+    MANAGEMENT_OF_PERIODONTAL_DISEASE                     NUMBER(1) DEFAULT 0 NOT NULL,
+    OD_CLASS_1                     NUMBER(1) DEFAULT 0 NOT NULL,
+    OD_CLASS_1_TOOTHNUM            VARCHAR2(100),
+    OD_CLASS_2                     NUMBER(1) DEFAULT 0 NOT NULL,
+    OD_CLASS_2_TOOTHNUM            VARCHAR2(100),
+    OD_CLASS_3                     NUMBER(1) DEFAULT 0 NOT NULL,
+    OD_CLASS_3_TOOTHNUM            VARCHAR2(100),
+    OD_CLASS_4                     NUMBER(1) DEFAULT 0 NOT NULL,
+    OD_CLASS_4_TOOTHNUM            VARCHAR2(100),
+    OD_CLASS_5                     NUMBER(1) DEFAULT 0 NOT NULL,
+    OD_CLASS_5_TOOTHNUM            VARCHAR2(100),
+    OD_ONLAY                       NUMBER(1) DEFAULT 0 NOT NULL,
+    OD_ONLAY_TOOTHNUM            VARCHAR2(100),
+    SURGERY_EXTRACTION              NUMBER(1) DEFAULT 0 NOT NULL,
+    SURGERY_EXTRACTION_TOOTHNUM     VARCHAR2(100),
+    SURGERY_ODONTECTOMY              NUMBER(1) DEFAULT 0 NOT NULL,
+    SURGERY_ODONTECTOMY_TOOTHNUM     VARCHAR2(100),
+    SURGERY_SPECIAL_CASE              NUMBER(1) DEFAULT 0 NOT NULL,
+    SURGERY_SPECIAL_CASE_TOOTHNUM     VARCHAR2(100),
+    SURGERY_PEDODONTICS              NUMBER(1) DEFAULT 0 NOT NULL,
+    SURGERY_PEDODONTICS_TOOTHNUM     VARCHAR2(100),
+    SURGERY_ORTHODONTICS              NUMBER(1) DEFAULT 0 NOT NULL,
+    SURGERY_ORTHODONTICS_TOOTHNUM     VARCHAR2(100),
+    ET_PULP_SEDATION                NUMBER(1) DEFAULT 0 NOT NULL,
+    ET_RECEMENTATION_OF_CROWNS      NUMBER(1) DEFAULT 0 NOT NULL,
+    ET_TEMPORARY_FILLINGS            NUMBER(1) DEFAULT 0 NOT NULL,
+    ET_MANAGEMENT_OF_ACUTE_INFECTIONS NUMBER(1) DEFAULT 0 NOT NULL,
+    ET_MANAGEMENT_OF_TRAUMATIC_INJURIES NUMBER(1) DEFAULT 0 NOT NULL,
+    FPD_LAMINATES_VENEERS            NUMBER(1) DEFAULT 0 NOT NULL,
+    FPD_LAMINATES_VENEERS_TOOTH_NUMBER                  VARCHAR2(100),
+    FPD_SINGLE_CROWN                  NUMBER(1) DEFAULT 0 NOT NULL,
+    FPD_SINGLE_CROWN_TOOTH_NUMBER                  VARCHAR2(100),
+    FPD_BRIDGE                        NUMBER(1) DEFAULT 0 NOT NULL,
+    FPD_BRIDGE_TOOTH_NUMBER                  VARCHAR2(100),
+    ENDODONTICS_ANTERIOR                      NUMBER(1) DEFAULT 0 NOT NULL,
+        ENDODONTICS_ANTERIOR_TOOTH_NUMBER                  VARCHAR2(100),
+    ENDODONTICS_POSTERIOR                     NUMBER(1) DEFAULT 0 NOT NULL,
+            ENDODONTICS_POSTERIOR_TOOTH_NUMBER                  VARCHAR2(100),
+    ENDODONTICS_OTHERS                        NUMBER(1) DEFAULT 0 NOT NULL,
+    ENDODONTICS_OTHERS_TOOTH_NUMBER                  VARCHAR2(100),
+    ENDODONTICS_OTHERS_SPECIFY                  VARCHAR2(100),
+    P_COMPLETE_DENTURE              NUMBER(1) DEFAULT 0 NOT NULL,
+    P_SINGLE_DENTURE                NUMBER(1) DEFAULT 0 NOT NULL,
+    P_REMOVABLE_PARTIAL_DENTURE    NUMBER(1) DEFAULT 0 NOT NULL,
+    P_OTHER_DENTURE_SERVICES        NUMBER(1) DEFAULT 0 NOT NULL,
+    CONSTRAINT PLW_PK PRIMARY KEY (PLW_ID)
+);
+
+CREATE SEQUENCE PLW_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+  alter table SOFT_TISSUE_EXAMINATION
+      drop column "DATE";
+  alter table SOFT_TISSUE_EXAMINATION add STE_DATE DATE NOT NULL;
+
+
+CREATE TABLE PRECONSULTATION (
+    PC_ID                           NUMBER NOT NULL,
+    OCCUPATION                      VARCHAR2(100),
+    EDUCATIONAL_ATTAINMENT          VARCHAR2(20),
+    EMAIL                           VARCHAR2(20),
+    SERVICE_CODE                    VARCHAR2(5),
+    CHIEF_COMPLAINT                 VARCHAR2(200),
+    HISTORY_OF_PRESENT_ILLNESS      VARCHAR2(200),
+    DH_DATE_OF_LAST_VISIT           DATE,
+    DH_PROCEDURES_DONE              VARCHAR2(1000),
+    DH_FREQUENCY_OF_DENTAL_VISIT    VARCHAR2(100),
+    DH_EXPOSURE_AND_RESPONSE_TO_LOCAL_ANAESTHESIA   VARCHAR2(100),
+    DH_COMPLICATIONS                VARCHAR2(1000),
+    PA_GAIT                         VARCHAR2(20),
+    PA_APPEARANCE                   VARCHAR2(20),
+    PA_DEFECTS                      VARCHAR2(20),
+    PA_WEIGHT                       VARCHAR2(10),
+    PA_HEIGHT                       VARCHAR2(10),
+    PA_BP                           VARCHAR2(5),
+    PA_RR                           VARCHAR2(5),
+    PA_PR                           VARCHAR2(5),
+    PA_TEMPERATURE                  VARCHAR2(5),
+    MH_PHYSICIANS_CARE              NUMBER(1) DEFAULT 0 NOT NULL,
+    MH_PHYSICIAN_NAME               VARCHAR2(80),
+    MH_PHYSICIAN_PHONE              NUMBER(15),
+    MH_HOSPITALIZED                 NUMBER(1) DEFAULT 0 NOT NULL,
+    MH_WHEN                         DATE,
+    MH_FOR_WHAT                     VARCHAR2(20),
+    MH_ALLERGIES                    VARCHAR2(200),
+    MH_ILLNESSES                    VARCHAR2(200),
+    MH_MEDICATIONS                  VARCHAR2(200),
+    MH_CHILDHOOD_DISEASE_HISTORY    VARCHAR2(200),
+    MH_MEDICAL_UPDATE               VARCHAR2(200),
+    SH_TOBACCO                      NUMBER(1) DEFAULT 0 NOT NULL,
+    TOBACCO_KIND                    VARCHAR2(255),
+    TOBACCO_FREQUENCY               VARCHAR2(255),
+    TOBACCO_YEARS_OF_USE            NUMBER(5),
+    TOBACCO_LAST_USED               DATE,
+    SH_ALCOHOL                      NUMBER(1) DEFAULT 0 NOT NULL,
+    ALCOHOL_KIND                    VARCHAR2(255),
+    ALCOHOL_FREQUENCY               VARCHAR2(255),
+    ALCOHOL_YEARS_OF_USE            NUMBER(5),
+    ALCOHOL_LAST_USED               DATE,
+    SH_DRUGS                        NUMBER(1) DEFAULT 0 NOT NULL,
+    DRUG_KIND                       VARCHAR2(255),
+    DRUG_FREQUENCY                  VARCHAR2(255),
+    DRUG_YEARS_OF_USE               NUMBER(5),
+    DRUG_LAST_USED                  DATE,
+    CONSTRAINT PC_PK PRIMARY KEY (PC_ID)
+);
+
+CREATE SEQUENCE PC_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+alter table PRECONSULTATION
+    modify PA_BP VARCHAR2(10);
+
+alter table PRECONSULTATION
+    modify PA_RR VARCHAR2(10);
+
+alter table PRECONSULTATION
+    modify PA_PR VARCHAR2(10);
+
+alter table PRECONSULTATION
+    modify PA_TEMPERATURE VARCHAR2(10);
+
+CREATE TABLE RADIOGRAPHIC_EXAM (
+    RE_ID                           NUMBER NOT NULL,
+    RE_DATE                         DATE,
+    TOOTH_NO                        NUMBER(2),
+    FINDINGS                        VARCHAR2(100),
+    NAME_OF_CLINICIAN               VARCHAR2(30),
+    CLINICIANS_SIGNATURE            VARCHAR2(30),
+    CONSTRAINT RE_PK PRIMARY KEY (RE_ID)
+);
+
+CREATE SEQUENCE RE_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+CREATE TABLE TREATMENT_PLAN_FORM (
+    TPF_ID                           NUMBER NOT NULL,
+    PROPOSED_TREATMENT_PLAN         VARCHAR2(1000),
+    CLINICIAN_NAME                  VARCHAR2(80),
+    CLINICIAN_SIGNATURE             VARCHAR2(10),
+    CLINICIAN_DATE                  DATE,
+    FACULTY_NAME                  VARCHAR2(80),
+    FACULTY_SIGNATURE             VARCHAR2(10),
+    FACULTY_DATE                  DATE,
+    CONSTRAINT TPF_PK PRIMARY KEY (TPF_ID)
+);
+
+
+CREATE SEQUENCE TPF_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+
+CREATE TABLE CHART_REQUEST_FORM (
+    CRF_ID                          NUMBER NOT NULL,
+    CRF_DATE                        DATE,
+    CRF_TIME                        VARCHAR2(8),
+    NEEDED_FOR                      VARCHAR2(50),
+    CHART_NUMBER_REQUESTED          VARCHAR2(6),
+    PATIENT_NAME                    VARCHAR2(80),
+    CLINICIAN_NAME_AND_SIGNATURE    VARCHAR2(90),
+    SECTION                         VARCHAR2(10),
+    STATUS                          VARCHAR2(15),
+    CONSTRAINT CRF_PK PRIMARY KEY (CRF_ID)
+);
+CREATE SEQUENCE CRF_SEQ
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+
+
+
+alter table MEDICAL_HISTORY_CHART
+    add PATIENT_ID INTEGER;
+alter table PRECONSULTATION
+    add PATIENT_ID INTEGER;
+alter table PROBLEM_LIST_WORKSHEET
+    add PATIENT_ID INTEGER;
+alter table RADIOGRAPHIC_EXAM
+    add PATIENT_ID INTEGER;
+alter table SOFT_TISSUE_EXAMINATION
+    add PATIENT_ID INTEGER;
+alter table TREATMENT_PLAN_FORM
+    add PATIENT_ID INTEGER;
+
+alter table MEDICAL_HISTORY_CHART add CONSTRAINT FK_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID);
+alter table PRECONSULTATION add CONSTRAINT FK1_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID);
+alter table PROBLEM_LIST_WORKSHEET add CONSTRAINT FK2_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID);
+alter table RADIOGRAPHIC_EXAM add CONSTRAINT FK3_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID);
+alter table SOFT_TISSUE_EXAMINATION add CONSTRAINT FK4_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID);
+alter table TREATMENT_PLAN_FORM add CONSTRAINT FK5_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID);
+
+
+alter table CHART
+    add PATIENT_ID INTEGER;
+alter table CHART add CONSTRAINT FK6_PatientParent FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID);
+
+alter table PRECONSULTATION
+    modify EMAIL VARCHAR2(50);
+
+    alter table CHART_REQUEST_FORM
+        add REQUESTER_NAME VARCHAR2(100)
+
+    alter table CHART_REQUEST_FORM
+        add REQUESTER_EMAIL VARCHAR2(100)
+
+
+alter table PRECONSULTATION
+    modify TOBACCO_LAST_USED VARCHAR2(30)
+/
+
+alter table PRECONSULTATION
+    modify ALCOHOL_LAST_USED VARCHAR2(30)
+/
+
+alter table PRECONSULTATION
+    modify DRUG_LAST_USED VARCHAR2(30)
+/
